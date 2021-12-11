@@ -48,6 +48,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.2'
 
     implementation "android.room:room-runtime:$room_version"
+    implementation 'com.android.support:support-v4:28.0.0'
     kapt "android.room:room-compiler:$room_version"
 
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
