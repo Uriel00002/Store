@@ -7,4 +7,6 @@
     <string name="hint_name">Nombre de la Tienda</string>
     <string name="helper_require">Requerido</string>
     <string name="helper_required">Requerido</string>
+    <string name="hint_phone">Telefono</string>
+    <string name="hint_website">URL del sitio</string>
 </resources>
