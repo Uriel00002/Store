@@ -1,4 +1,4 @@
-package com.cursosant.android.stores2
+package com.cursosant.android.stores
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

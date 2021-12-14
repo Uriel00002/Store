@@ -1,4 +1,4 @@
-package com.cursosant.android.stores2
+package com.cursosant.android.stores
 
 import android.app.Application
 import androidx.room.Room
