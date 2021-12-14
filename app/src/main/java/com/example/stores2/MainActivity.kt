@@ -1,5 +1,4 @@
 package com.cursosant.android.stores2
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.GridLayoutManager
