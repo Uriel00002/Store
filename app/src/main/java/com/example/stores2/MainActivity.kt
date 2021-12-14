@@ -3,6 +3,7 @@ package com.example.stores2
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.GridLayout
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.stores2.databinding.ActivityMainBinding
 import org.jetbrains.anko.doAsync
@@ -33,7 +34,20 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             mAdapter.add(store)
         }
 
+        mBinding.fab.setOnClickListenner{ LaunchEditFragment }
+
         setupRecyclerView()
+    }
+
+    private fun LaunchEditFragment(){
+        val fragment = EditStoreFragment()
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+
+        fragmentTransaction.add(R,id.containerMain, fragment)
+
+        fragmentTransaction.commit()
+
     }
 
     private fun setupRecyclerView() {
