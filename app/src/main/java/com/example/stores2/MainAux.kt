@@ -10,8 +10,6 @@ package com.cursosant.android.stores2
  *
  * Diseño para Apps
  ***/
-interface OnClickListener {
-    fun onClick(storeEntity: StoreEntity)
-    fun onFavoriteStore(storeEntity: StoreEntity)
-    fun onDeleteStore(storeEntity: StoreEntity)
+interface MainAux {
+    fun hideFab(isVisible: Boolean = false)
 }
