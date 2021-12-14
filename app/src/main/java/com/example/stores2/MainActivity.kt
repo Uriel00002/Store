@@ -1,30 +1,25 @@
-package com.example.stores2
+package com.cursosant.android.stores
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.GridLayout
-import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.stores2.databinding.ActivityMainBinding
+import com.cursosant.android.stores.databinding.ActivityMainBinding
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity(), OnClickListener {
 
-
     private lateinit var mBinding: ActivityMainBinding
 
-    private  lateinit var mAdapter: StoreAdapter
-
-    private  lateinit var mGridLayout: GridLayout
-
+    private lateinit var mAdapter: StoreAdapter
+    private lateinit var mGridLayout: GridLayoutManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
 
-        mBinding.btnSave.setOnClickListener{
+        /*mBinding.btnSave.setOnClickListener {
             val store = StoreEntity(name = mBinding.etName.text.toString().trim())
 
             Thread {
@@ -32,31 +27,32 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             }.start()
 
             mAdapter.add(store)
-        }
+        }*/
 
-        mBinding.fab.setOnClickListenner{ LaunchEditFragment }
+        mBinding.fab.setOnClickListener { launchEditFragment() }
 
-        setupRecyclerView()
+        setupRecylcerView()
     }
 
-    private fun LaunchEditFragment(){
+    private fun launchEditFragment() {
         val fragment = EditStoreFragment()
+
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
 
-        fragmentTransaction.add(R,id.containerMain, fragment)
+        fragmentTransaction.add(R.id.containerMain, fragment)
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
-        mBinding.fab:hide()
+        mBinding.fab.hide()
     }
 
-    private fun setupRecyclerView() {
-        mAdapter = StoreAdapter(mutableListOf(), this )
+    private fun setupRecylcerView() {
+        mAdapter = StoreAdapter(mutableListOf(), this)
         mGridLayout = GridLayoutManager(this, 2)
         getStores()
 
-        mBinding.recyclerView.apply{
+        mBinding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = mGridLayout
             adapter = mAdapter
@@ -64,7 +60,6 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun getStores(){
-
         doAsync {
             val stores = StoreApplication.database.storeDao().getAllStores()
             uiThread {
@@ -73,8 +68,11 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         }
     }
 
-    override fun onClick(storeEntity: StoreEntity){
-
+    /*
+    * OnClickListener
+    * */
+    override fun onClick(storeEntity: StoreEntity) {
+        TODO("Not yet implemented")
     }
 
     override fun onFavoriteStore(storeEntity: StoreEntity) {
@@ -82,7 +80,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         doAsync {
             StoreApplication.database.storeDao().updateStore(storeEntity)
             uiThread {
-                mAdapter.adapte(storeEntity)
+                mAdapter.update(storeEntity)
             }
         }
     }
@@ -95,5 +93,4 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             }
         }
     }
-
 }

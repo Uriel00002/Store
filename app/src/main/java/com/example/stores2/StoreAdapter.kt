@@ -1,13 +1,23 @@
-package com.example.stores2
+package com.cursosant.android.stores
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stores2.databinding.ItemStoreBinding
+import com.cursosant.android.stores.databinding.ItemStoreBinding
 
-class StoreAdapter (private var stores: MutableList<StoreEntity>, private var listener: OnClickListener):
+/****
+ * Proyecto: Stores
+ *
+ *
+ * Daniel Fernandez Guarneros 4°A
+ *
+ * Desarrollo de Software Multiplataforma
+ *
+ * Diseño para Apps
+ ***/
+class StoreAdapter(private var stores: MutableList<StoreEntity>, private var listener: OnClickListener) :
     RecyclerView.Adapter<StoreAdapter.ViewHolder>(){
 
     private lateinit var mContext: Context
@@ -25,6 +35,7 @@ class StoreAdapter (private var stores: MutableList<StoreEntity>, private var li
 
         with(holder){
             setListener(store)
+
             binding.tvName.text = store.name
             binding.cbFavorite.isChecked = store.isFavorite
         }
@@ -42,9 +53,9 @@ class StoreAdapter (private var stores: MutableList<StoreEntity>, private var li
         notifyDataSetChanged()
     }
 
-    fun adapte(storeEntity: StoreEntity) {
+    fun update(storeEntity: StoreEntity) {
         val index = stores.indexOf(storeEntity)
-        if(index != -1){
+        if (index != -1){
             stores.set(index, storeEntity)
             notifyItemChanged(index)
         }
@@ -52,19 +63,18 @@ class StoreAdapter (private var stores: MutableList<StoreEntity>, private var li
 
     fun delete(storeEntity: StoreEntity) {
         val index = stores.indexOf(storeEntity)
-        if(index != -1){
+        if (index != -1){
             stores.removeAt(index)
             notifyItemRemoved(index)
         }
     }
 
-    inner class ViewHolder(view : View) : RecyclerView.ViewHolder(view){
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val binding = ItemStoreBinding.bind(view)
 
         fun setListener(storeEntity: StoreEntity){
             with(binding.root) {
                 setOnClickListener { listener.onClick(storeEntity) }
-
                 setOnLongClickListener {
                     listener.onDeleteStore(storeEntity)
                     true
@@ -76,5 +86,4 @@ class StoreAdapter (private var stores: MutableList<StoreEntity>, private var li
             }
         }
     }
-
 }
