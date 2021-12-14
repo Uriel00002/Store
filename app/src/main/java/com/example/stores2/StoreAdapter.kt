@@ -1,5 +1,4 @@
 package com.cursosant.android.stores2
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
